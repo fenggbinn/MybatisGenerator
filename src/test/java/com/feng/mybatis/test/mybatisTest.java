@@ -15,11 +15,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class mybatisTest {
-    @Test
+    //@Test
     public void testGenerator() throws InterruptedException, SQLException, IOException, XMLParserException, InvalidConfigurationException {
         List<String> warnings = new ArrayList<String>();
         boolean overwrite = true;
         File configFile = new File("mbg.xml");
+        ConfigurationParser cp = new ConfigurationParser(warnings);
+        Configuration config = cp.parseConfiguration(configFile);
+        DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+        myBatisGenerator.generate(null);
+    }
+
+    @Test
+    public void testGenerator2() throws InterruptedException, SQLException, IOException, XMLParserException, InvalidConfigurationException {
+        List<String> warnings = new ArrayList<String>();
+        boolean overwrite = true;
+        File configFile = new File("mbg2.xml");
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(configFile);
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
